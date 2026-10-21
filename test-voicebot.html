@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Test our Voice Bot — Ai4SMB.agency</title>
+  <meta name="description" content="Try the AI4SMB voice agent.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Signika:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/config.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
+<body data-voice-consent>
+  <div id="site-header"></div>
+  <main id="page">
+    <section class="section section--light">
+      <div class="container voice-test">
+        <h2 class="reveal">Talk to our AI voice agent 🎙️</h2>
+        <p class="reveal">Hear for yourself how a voice bot could answer your customers' calls. Tick the box below to switch on the demo, then click the call button that appears.</p>
+        <label class="consent reveal">
+          <input type="checkbox" id="voice-consent">
+          <span>I consent to the handling of call data by ElevenLabs (3rd party) based on their terms and in our privacy policy (see footer).</span>
+        </label>
+        <div class="voice-stage" id="voice-stage">The voice agent will appear once you have given consent.</div>
+      </div>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+  <script>
+    document.getElementById("voice-consent").addEventListener("change", function (e) {
+      if (!e.target.checked) return;
+      var stage = document.getElementById("voice-stage");
+      stage.textContent = "";
+      window.loadVoiceAgent(stage);
+      e.target.disabled = true;
+    });
+  </script>
+</body>
+</html>

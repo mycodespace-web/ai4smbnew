@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact — Ai4SMB.agency</title>
+  <meta name="description" content="Get in touch with AI4SMB about AI for your small business.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Signika:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/config.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+  <div id="site-header"></div>
+  <main id="page">
+    <section class="section section--light">
+      <div class="container">
+        <div class="section-title reveal">
+          <h2>Contact Us ✉️</h2>
+          <p>Got a question, or prefer to talk to a person? Send us a message using the form and we'll reply quickly.</p>
+        </div>
+        <div class="form-card reveal">
+          <form data-form="contact" novalidate>
+            <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <div class="form">
+              <div class="form-row">
+                <div class="field" data-required><label for="c-first">First name <span class="req">(required)</span></label><input id="c-first" type="text" name="first_name" autocomplete="given-name"><div class="error-msg">Please enter your first name.</div></div>
+                <div class="field" data-required><label for="c-last">Last name <span class="req">(required)</span></label><input id="c-last" type="text" name="last_name" autocomplete="family-name"><div class="error-msg">Please enter your last name.</div></div>
+              </div>
+              <div class="field"><label for="c-company">Company</label><input id="c-company" type="text" name="company" autocomplete="organization"></div>
+              <div class="form-row">
+                <div class="field" data-required><label for="c-email">Email <span class="req">(required)</span></label><input id="c-email" type="email" name="email" autocomplete="email"><div class="error-msg">Please enter a valid email address.</div></div>
+                <div class="field"><label for="c-phone">Phone</label><input id="c-phone" type="tel" name="phone" autocomplete="tel"></div>
+              </div>
+              <div class="field" data-required><label for="c-message">Message <span class="req">(required)</span></label><textarea id="c-message" name="message"></textarea><div class="error-msg">Please enter a message.</div></div>
+              <div><button class="btn" type="submit">Send</button></div>
+            </div>
+          </form>
+          <div class="form-success" data-success="contact">
+            <div class="check">&#10003;</div>
+            <h3>Thank you!</h3>
+            <p>Your message has arrived. We'll get back to you shortly.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+</body>
+</html>
