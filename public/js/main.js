@@ -116,6 +116,10 @@
       toggle.setAttribute("aria-expanded", String(open));
     });
     wrap.querySelector("[data-voice-start]").addEventListener("click", function () {
+      if (cfg.preview) {
+        pop.innerHTML = "<p>On the live site, the ElevenLabs voice agent starts here.</p>";
+        return;
+      }
       wrap.remove();
       loadVoiceAgent();
     });
@@ -328,7 +332,14 @@
       '<p class="facade-note">Loading connects to ' + service + ' and their privacy policy applies. ' +
       '<a href="' + linkUrl + '" target="_blank" rel="noopener">Open on ' + service + ' instead</a>.</p>' +
       "</div>";
-    target.querySelector("button").addEventListener("click", function () { target.innerHTML = ""; load(); });
+    target.querySelector("button").addEventListener("click", function () {
+      if (cfg.preview) { // design preview: show what would happen instead of contacting the service
+        target.querySelector(".facade").innerHTML = "<p>On the live site, the " + service + " embed loads here.</p>";
+        return;
+      }
+      target.innerHTML = "";
+      load();
+    });
   }
 
   function embeds() {
