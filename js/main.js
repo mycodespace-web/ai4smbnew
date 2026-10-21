@@ -27,29 +27,36 @@
 
   function logoHtml() {
     if (cfg.logoSrc) return '<img src="' + cfg.logoSrc + '" alt="' + cfg.brand + '">';
-    return '<span class="logo-text">Ai<span>4</span>SMB<small>.agency</small></span>';
+    // Placeholder wordmark; set logoSrc in js/config.js to use the real logo file.
+    return '<svg viewBox="0 0 250 50" role="img" aria-label="' + cfg.domain + '">' +
+      '<text x="4" y="24" font-family="Verdana, sans-serif" font-size="21" font-weight="700" letter-spacing="-.5" fill="#000">ai<tspan fill="#c79e30">4</tspan>smb<tspan fill="#c79e30">.</tspan>agency</text>' +
+      '<path d="M8 40c40 6 120 4 210-22" fill="none" stroke="#c79e30" stroke-width="3" stroke-linecap="round"/>' +
+      '<path d="M212 10l14 4-9 11" fill="none" stroke="#c79e30" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<ellipse cx="11" cy="40" rx="6" ry="3.5" fill="#c79e30"/></svg>';
   }
 
   function renderHeader() {
     var slot = document.getElementById("site-header");
     if (!slot) return;
     var links = navLink("index.html", "Home", "") + navLink("contact.html", "Contact", "contact") + navLink("podcast.html", "Podcast", "podcast");
+    var globe = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c3 3.2 3 15.8 0 19M12 2.5c-3 3.2-3 15.8 0 19"/></svg>';
     slot.outerHTML =
       '<a class="skip-link" href="#page">Skip to Content</a>' +
       '<header class="site-header" id="header">' +
-      '  <div class="container header-inner">' +
+      '  <div class="header-inner">' +
       '    <a class="logo" href="index.html" aria-label="' + cfg.brand + ' home">' + logoHtml() + "</a>" +
       '    <nav class="main-nav" aria-label="Main">' + links + "</nav>" +
       '    <div class="header-actions">' +
-      '      <a class="login" href="' + (cfg.loginUrl || "#") + '"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Login Account</a>' +
+      '      <a class="login" href="' + (cfg.loginUrl || "#") + '">Login</a>' +
+      '      <button class="lang" type="button" aria-label="Language: English">' + globe + 'English<svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 4l4 4 4-4"/></svg></button>' +
       '      <a class="btn btn--sm" href="book-discovery-call.html">Get Started</a>' +
       "    </div>" +
       '    <button class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>' +
       "  </div>" +
       "</header>" +
       '<nav class="mobile-menu" id="mobile-menu" aria-label="Mobile">' + links +
-      '  <a href="' + (cfg.loginUrl || "#") + '">Login Account</a>' +
-      '  <span class="lang">English</span>' +
+      '  <a href="' + (cfg.loginUrl || "#") + '">Login</a>' +
+      '  <span class="lang">' + globe + 'English</span>' +
       '  <a class="btn" href="book-discovery-call.html">Get Started</a>' +
       "</nav>";
 
@@ -63,9 +70,6 @@
       menu.classList.toggle("is-open", open);
       document.body.style.overflow = open ? "hidden" : "";
     });
-    window.addEventListener("scroll", function () {
-      header.classList.toggle("is-scrolled", window.scrollY > 10);
-    }, { passive: true });
   }
 
   /* ---------- Footer ---------- */
@@ -75,10 +79,10 @@
     slot.outerHTML =
       '<footer class="site-footer">' +
       '  <div class="container footer-inner">' +
+      '    <span class="footer-brand">' + cfg.domain + "</span>" +
       '    <nav class="footer-links" aria-label="Footer">' +
       '      <a href="tms.html">Terms</a><a href="ppl.html">Privacy*</a><a href="cpd.html">About</a>' +
       "    </nav>" +
-      '    <span class="footer-brand">' + cfg.domain + "</span>" +
       "  </div>" +
       "</footer>";
   }
@@ -96,13 +100,20 @@
     function showBanner() {
       var b = el(
         '<div class="cookie-banner" role="dialog" aria-label="Cookie consent">' +
-        "<p>We use cookies to understand how visitors use this site and to improve it. Only essential cookies are set until you agree. Details are in our <a href=\"ppl.html\">privacy policy</a>.</p>" +
+        "<p>&#127850; Cookies, anyone?</p>" +
+        "<p>We use a few cookies to keep this site working well and to learn what visitors find useful:</p>" +
+        "<ul><li>&#128736;&#65039; Essential site features</li><li>&#128200; Anonymous usage statistics</li><li>&#10024; Ongoing improvements</li></ul>" +
+        "<p>Choose \u201cYum, I Accept!\u201d to allow them all, or manage your options. Details are in our <a href=\"ppl.html\">privacy policy</a>.</p>" +
         '<div class="cookie-actions">' +
-        '<button class="btn" data-c="accepted" type="button">&#127850; Yum, I Accept!</button>' +
-        '<button class="btn btn--ghost" data-c="declined" type="button">Decline all</button>' +
+        '<button class="btn btn--xs" data-c="accepted" type="button">&#127850; Yum, I Accept!</button>' +
+        '<button class="btn btn--xs btn--outline" data-manage type="button">Manage cookies</button>' +
         "</div></div>"
       );
       b.addEventListener("click", function (e) {
+        if (e.target.hasAttribute("data-manage")) {
+          e.target.outerHTML = '<button class="btn btn--xs btn--outline" data-c="declined" type="button">Decline all</button>';
+          return;
+        }
         var c = e.target.getAttribute("data-c");
         if (!c) return;
         storage("cookie-consent", c);
@@ -134,21 +145,13 @@
     var hero = document.querySelector("[data-slideshow]");
     if (!hero) return;
     var slides = hero.querySelectorAll(".slide");
-    var dotsWrap = hero.querySelector(".hero-dots");
     var i = 0, timer;
-    slides.forEach(function (s, n) {
-      var d = el('<button type="button" role="tab" aria-label="Slide ' + (n + 1) + '"></button>');
-      d.addEventListener("click", function () { go(n); restart(); });
-      dotsWrap.appendChild(d);
-    });
-    var dots = dotsWrap.querySelectorAll("button");
     function go(n) {
       i = (n + slides.length) % slides.length;
       slides.forEach(function (s, k) {
         s.classList.toggle("is-active", k === i);
         s.setAttribute("aria-hidden", String(k !== i));
       });
-      dots.forEach(function (d, k) { d.setAttribute("aria-selected", String(k === i)); });
     }
     function restart() {
       clearInterval(timer);
