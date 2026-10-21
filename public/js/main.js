@@ -323,6 +323,88 @@
     items.forEach(function (x) { io.observe(x); });
   }
 
+  /* ---------- Bokeh background: soft drifting circles behind a section ---------- */
+  // Add data-bokeh to any section. Optional data-bokeh-colors="r,g,b|r,g,b" sets the circle colours.
+  function bokeh() {
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.querySelectorAll("[data-bokeh]").forEach(function (section) {
+      var colors = (section.getAttribute("data-bokeh-colors") || "255,255,255|255,236,180|255,248,230")
+        .split("|").map(function (c) { return c.trim(); });
+      var canvas = document.createElement("canvas");
+      canvas.className = "bokeh";
+      canvas.setAttribute("aria-hidden", "true");
+      section.insertBefore(canvas, section.firstChild);
+      var ctx = canvas.getContext("2d");
+      var w = 0, h = 0, dpr = 1, dots = [], sprites = {}, raf = null, last = 0, visible = false;
+
+      function sprite(color) {
+        // One pre-rendered soft circle per colour, scaled when drawn.
+        if (sprites[color]) return sprites[color];
+        var s = document.createElement("canvas"); s.width = s.height = 128;
+        var g = s.getContext("2d"), grad = g.createRadialGradient(64, 64, 0, 64, 64, 64);
+        grad.addColorStop(0, "rgba(" + color + ",1)");
+        grad.addColorStop(0.55, "rgba(" + color + ",.75)");
+        grad.addColorStop(1, "rgba(" + color + ",0)");
+        g.fillStyle = grad; g.fillRect(0, 0, 128, 128);
+        return (sprites[color] = s);
+      }
+
+      function rand(a, b) { return a + Math.random() * (b - a); }
+
+      function resize() {
+        var r = section.getBoundingClientRect();
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        w = r.width; h = r.height;
+        canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+        var count = Math.max(10, Math.min(40, Math.round((w * h) / 28000)));
+        while (dots.length < count) {
+          dots.push({
+            x: rand(0, w), y: rand(0, h), r: rand(24, 130),
+            vx: rand(-9, 9), vy: rand(-12, -3), a: rand(0.05, 0.2),
+            phase: rand(0, Math.PI * 2), speed: rand(0.2, 0.6),
+            img: sprite(colors[Math.floor(Math.random() * colors.length)])
+          });
+        }
+        dots.length = count;
+        draw(0);
+      }
+
+      function draw(dt) {
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.clearRect(0, 0, w, h);
+        for (var i = 0; i < dots.length; i++) {
+          var d = dots[i];
+          d.x += d.vx * dt; d.y += d.vy * dt; d.phase += d.speed * dt;
+          if (d.y < -d.r) { d.y = h + d.r; d.x = rand(0, w); }
+          if (d.x < -d.r) d.x = w + d.r; else if (d.x > w + d.r) d.x = -d.r;
+          ctx.globalAlpha = d.a * (0.65 + 0.35 * Math.sin(d.phase));
+          ctx.drawImage(d.img, d.x - d.r, d.y - d.r, d.r * 2, d.r * 2);
+        }
+        ctx.globalAlpha = 1;
+      }
+
+      function frame(t) {
+        var dt = last ? Math.min((t - last) / 1000, 0.05) : 0;
+        last = t;
+        draw(dt);
+        raf = requestAnimationFrame(frame);
+      }
+      function start() { if (!raf && !reduce && visible && !document.hidden) { last = 0; raf = requestAnimationFrame(frame); } }
+      function stop() { if (raf) { cancelAnimationFrame(raf); raf = null; } }
+
+      resize();
+      if ("ResizeObserver" in window) new ResizeObserver(resize).observe(section);
+      else window.addEventListener("resize", resize);
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver(function (entries) {
+          visible = entries[0].isIntersecting;
+          if (visible) start(); else stop();
+        }).observe(section);
+      } else { visible = true; start(); }
+      document.addEventListener("visibilitychange", function () { if (document.hidden) stop(); else start(); });
+    });
+  }
+
   /* ---------- Embeds (click to load, so nothing third-party runs before the visitor asks) ---------- */
   function facade(target, service, label, linkUrl, load) {
     target.innerHTML =
@@ -374,6 +456,7 @@
     forms();
     reveal();
     embeds();
+    bokeh();
     // The voice test page has its own consent checkbox; elsewhere a floating button asks first.
     if (!document.body.hasAttribute("data-voice-consent")) voiceButton();
   });

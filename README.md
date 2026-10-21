@@ -44,6 +44,8 @@ Until `FORM_WEBHOOK_URL` is set, form submissions get a "not configured" error, 
 
 The layout mirrors the original Squarespace site: centred logo and nav, hero slideshow with a light text box, gold `#c79e30` accent, warm grey `#eeece9` sections, slanted section edges, pill buttons and a grey footer band with a wavy edge. Headings use **Andika** (self-hosted) as a free stand-in for the original's Bree typeface; change `--heading` in `css/styles.css` if you license Bree. Body text uses Verdana, as on the original.
 
+**Bokeh background:** the gold FAQ section has soft, drifting circles, as on the original. Add `data-bokeh` to any other `<section>` to use it there; `data-bokeh-colors="255,255,255|255,236,180"` changes the circle colours (RGB values separated by `|`). It pauses off screen and stays still for visitors who prefer reduced motion.
+
 ## Local preview
 
 ```
