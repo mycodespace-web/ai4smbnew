@@ -282,18 +282,19 @@ p { margin: 0 0 1em; font-size: var(--p-size); line-height: 1.6; letter-spacing:
 .footer-links a { color: var(--accent); }
 @media (max-width: 700px) { .footer-links { margin-right: 0; } }
 
-/* Cookie banner */
-.cookie-banner {
-  position: fixed; right: 20px; bottom: 20px; z-index: 400;
-  max-width: 360px; background: var(--light-accent); color: var(--ink);
-  padding: 22px 20px; box-shadow: 0 4px 20px rgba(0,0,0,.08);
-  font-size: 14px; line-height: 1.65; letter-spacing: -.02em; animation: rise .35s ease;
-}
-.cookie-banner p { font-size: 14px; margin-bottom: 8px; letter-spacing: -.02em; }
-.cookie-banner ul { list-style: none; padding-left: 24px; margin: 0 0 8px; }
-.cookie-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 16px; }
-.cookie-pill { position: fixed; left: 20px; bottom: 20px; z-index: 390; background: var(--white); border: 1px solid var(--line); border-radius: 999px; padding: 8px 16px; font-size: .78rem; cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,.08); }
-@media (max-width: 480px) { .cookie-banner { left: 12px; right: 12px; max-width: none; } }
+/* Floating voice agent button (loads ElevenLabs only after consent) */
+.voice-fab { position: fixed; right: 20px; bottom: 20px; z-index: 400; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+.voice-toggle { font-size: 15px; padding: .7em 1.3em; box-shadow: 0 6px 20px rgba(0,0,0,.15); }
+.voice-pop { width: min(320px, calc(100vw - 40px)); background: var(--light-accent); padding: 18px; box-shadow: 0 6px 24px rgba(0,0,0,.12); }
+.voice-pop[hidden] { display: none; }
+.voice-pop p { font-size: 13px; line-height: 1.6; margin-bottom: 12px; letter-spacing: -.02em; }
+
+/* Click-to-load placeholder for embeds */
+.facade { background: var(--light-accent); border-radius: 12px; padding: clamp(32px, 6vw, 64px) 24px; text-align: center; }
+.facade p { font-size: 17px; }
+.facade .btn { margin: 8px 0 18px; }
+.facade .facade-note { font-size: 13px; color: var(--ink-soft); margin: 0; }
+.facade .facade-note a { color: var(--accent-dark); }
 
 /* Reveal on scroll */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }

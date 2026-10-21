@@ -1,4 +1,5 @@
-// Shared layout (header, footer, cookie banner, voice agent) and interactive components.
+// Shared layout (header, footer, voice agent button) and interactive components.
+// No cookies or browser storage are used; third-party services load only after a click.
 (function () {
   "use strict";
 
@@ -10,13 +11,6 @@
     var t = document.createElement("template");
     t.innerHTML = html.trim();
     return t.content.firstElementChild;
-  }
-
-  function storage(key, value) {
-    try {
-      if (value === undefined) return localStorage.getItem(key);
-      localStorage.setItem(key, value);
-    } catch (e) { return null; }
   }
 
   /* ---------- Header ---------- */
@@ -87,44 +81,6 @@
       "</footer>";
   }
 
-  /* ---------- Cookie banner (opt-in) ---------- */
-  function cookieBanner() {
-    var choice = storage("cookie-consent");
-    var pill;
-    function showPill() {
-      if (pill) return;
-      pill = el('<button class="cookie-pill" type="button">Cookie Preferences</button>');
-      pill.addEventListener("click", function () { pill.remove(); pill = null; showBanner(); });
-      document.body.appendChild(pill);
-    }
-    function showBanner() {
-      var b = el(
-        '<div class="cookie-banner" role="dialog" aria-label="Cookie consent">' +
-        "<p>&#127850; Cookies, anyone?</p>" +
-        "<p>We use a few cookies to keep this site working well and to learn what visitors find useful:</p>" +
-        "<ul><li>&#128736;&#65039; Essential site features</li><li>&#128200; Anonymous usage statistics</li><li>&#10024; Ongoing improvements</li></ul>" +
-        "<p>Choose \u201cYum, I Accept!\u201d to allow them all, or manage your options. Details are in our <a href=\"ppl.html\">privacy policy</a>.</p>" +
-        '<div class="cookie-actions">' +
-        '<button class="btn btn--xs" data-c="accepted" type="button">&#127850; Yum, I Accept!</button>' +
-        '<button class="btn btn--xs btn--outline" data-manage type="button">Manage cookies</button>' +
-        "</div></div>"
-      );
-      b.addEventListener("click", function (e) {
-        if (e.target.hasAttribute("data-manage")) {
-          e.target.outerHTML = '<button class="btn btn--xs btn--outline" data-c="declined" type="button">Decline all</button>';
-          return;
-        }
-        var c = e.target.getAttribute("data-c");
-        if (!c) return;
-        storage("cookie-consent", c);
-        b.remove();
-        showPill();
-      });
-      document.body.appendChild(b);
-    }
-    if (choice) showPill(); else showBanner();
-  }
-
   /* ---------- ElevenLabs voice agent ---------- */
   var voiceLoaded = false;
   function loadVoiceAgent(container) {
@@ -139,6 +95,32 @@
     document.body.appendChild(s);
   }
   window.loadVoiceAgent = loadVoiceAgent;
+
+  // Floating button: the ElevenLabs widget is only loaded after the visitor agrees.
+  function voiceButton() {
+    if (!cfg.elevenlabsAgentId) return;
+    var wrap = el(
+      '<div class="voice-fab">' +
+      '<div class="voice-pop" id="voice-pop" hidden>' +
+      "<p>The voice agent is provided by ElevenLabs. Starting it connects to their service and processes your call data under their terms and our <a href=\"ppl.html\">privacy policy</a>.</p>" +
+      '<button class="btn btn--xs" type="button" data-voice-start>Start voice agent</button>' +
+      "</div>" +
+      '<button class="btn voice-toggle" type="button" aria-expanded="false" aria-controls="voice-pop">&#128222; Speak to AI-Agent now</button>' +
+      "</div>"
+    );
+    var toggle = wrap.querySelector(".voice-toggle");
+    var pop = wrap.querySelector(".voice-pop");
+    toggle.addEventListener("click", function () {
+      var open = pop.hidden;
+      pop.hidden = !open;
+      toggle.setAttribute("aria-expanded", String(open));
+    });
+    wrap.querySelector("[data-voice-start]").addEventListener("click", function () {
+      wrap.remove();
+      loadVoiceAgent();
+    });
+    document.body.appendChild(wrap);
+  }
 
   /* ---------- Hero slideshow ---------- */
   function slideshow() {
@@ -299,20 +281,14 @@
         btn.disabled = true;
         btn.textContent = "Sending…";
         var data = serialize(form);
-        var endpoint = (cfg.forms || {})[key];
-        var req = endpoint
-          ? fetch(endpoint, {
+        data._form = key;
+        var req = cfg.demoForms
+          ? new Promise(function (res) { setTimeout(res, 500); }) // preview only: nothing is sent
+          : fetch(cfg.formEndpoint || "/api/submit", {
               method: "POST",
               headers: { "Content-Type": "application/json", Accept: "application/json" },
               body: JSON.stringify(data)
-            }).then(function (r) { if (!r.ok) throw new Error(r.status); })
-          : new Promise(function (res) {
-              var saved = JSON.parse(storage("submissions-" + key) || "[]");
-              saved.push(data);
-              storage("submissions-" + key, JSON.stringify(saved));
-              console.info("[" + key + "] No form endpoint configured in js/config.js; submission kept locally:", data);
-              setTimeout(res, 500);
-            });
+            }).then(function (r) { if (!r.ok) throw new Error(r.status); });
         req.then(function () {
           form.hidden = true;
           if (success) {
@@ -343,20 +319,38 @@
     items.forEach(function (x) { io.observe(x); });
   }
 
-  /* ---------- Embeds ---------- */
+  /* ---------- Embeds (click to load, so nothing third-party runs before the visitor asks) ---------- */
+  function facade(target, service, label, linkUrl, load) {
+    target.innerHTML =
+      '<div class="facade">' +
+      '<p>' + label + '</p>' +
+      '<button class="btn" type="button">Load ' + service + '</button>' +
+      '<p class="facade-note">Loading connects to ' + service + ' and their privacy policy applies. ' +
+      '<a href="' + linkUrl + '" target="_blank" rel="noopener">Open on ' + service + ' instead</a>.</p>' +
+      "</div>";
+    target.querySelector("button").addEventListener("click", function () { target.innerHTML = ""; load(); });
+  }
+
   function embeds() {
     var cal = document.querySelector("[data-calendly]");
     if (cal && cfg.calendlyUrl) {
-      cal.setAttribute("data-url", cfg.calendlyUrl);
-      var s = document.createElement("script");
-      s.src = "https://assets.calendly.com/assets/external/widget.js";
-      s.async = true;
-      document.body.appendChild(s);
+      cal.classList.remove("calendly-inline-widget");
+      facade(cal, "Calendly", "Pick a time that suits you in our booking calendar.", cfg.calendlyUrl, function () {
+        cal.classList.add("calendly-inline-widget");
+        cal.setAttribute("data-url", cfg.calendlyUrl);
+        var s = document.createElement("script");
+        s.src = "https://assets.calendly.com/assets/external/widget.js";
+        s.async = true;
+        document.body.appendChild(s);
+      });
     }
     var sp = document.querySelector("[data-spotify]");
     if (sp && cfg.spotifyPlaylistId) {
-      sp.innerHTML = '<iframe title="The AI4SMB Podcast on Spotify" src="https://open.spotify.com/embed/playlist/' +
-        cfg.spotifyPlaylistId + '?utm_source=generator" height="560" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>';
+      var url = "https://open.spotify.com/playlist/" + cfg.spotifyPlaylistId;
+      facade(sp, "Spotify", "Listen to every episode in the Spotify player.", url, function () {
+        sp.innerHTML = '<iframe title="Podcast on Spotify" src="https://open.spotify.com/embed/playlist/' +
+          cfg.spotifyPlaylistId + '?utm_source=generator" height="560" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>';
+      });
     }
   }
 
@@ -369,8 +363,7 @@
     forms();
     reveal();
     embeds();
-    cookieBanner();
-    // Voice test pages load the agent only after consent; everywhere else it loads straight away.
-    if (!document.body.hasAttribute("data-voice-consent")) loadVoiceAgent();
+    // The voice test page has its own consent checkbox; elsewhere a floating button asks first.
+    if (!document.body.hasAttribute("data-voice-consent")) voiceButton();
   });
 })();
