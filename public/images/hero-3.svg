@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <!-- Slide 3: staying ahead of competitors (rising chart, climber reaching the top) -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#efe9de"/><stop offset="1" stop-color="#dcd3c5"/></linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <circle cx="1330" cy="190" r="90" fill="#e3c675" opacity=".55"/>
+  <!-- distant skyline -->
+  <g fill="#cfc5b5">
+    <rect x="0" y="560" width="90" height="240"/><rect x="100" y="500" width="70" height="300"/><rect x="180" y="580" width="110" height="220"/>
+    <rect x="620" y="610" width="80" height="190"/><rect x="900" y="590" width="90" height="210"/><rect x="1000" y="540" width="60" height="260"/>
+  </g>
+  <rect y="790" width="1600" height="110" fill="#c4b7a4"/>
+  <!-- bar chart with arrow (left) -->
+  <g>
+    <rect x="80" y="640" width="70" height="150" rx="6" fill="#8a8174"/>
+    <rect x="180" y="570" width="70" height="220" rx="6" fill="#8a8174"/>
+    <rect x="280" y="480" width="70" height="310" rx="6" fill="#6d665c"/>
+    <rect x="380" y="360" width="70" height="430" rx="6" fill="#c79e30"/>
+    <path d="M70 560L210 470 310 400 440 250" fill="none" stroke="#4a453e" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M400 236l58-8-10 58" fill="none" stroke="#4a453e" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <!-- staircase (right) -->
+  <g fill="#fbf8f1">
+    <rect x="1080" y="700" width="520" height="90"/><rect x="1200" y="610" width="400" height="90"/>
+    <rect x="1320" y="520" width="280" height="90"/><rect x="1440" y="430" width="160" height="90"/>
+  </g>
+  <g fill="#e3ddd2"><rect x="1080" y="700" width="520" height="10"/><rect x="1200" y="610" width="400" height="10"/><rect x="1320" y="520" width="280" height="10"/><rect x="1440" y="430" width="160" height="10"/></g>
+  <!-- flag at the top -->
+  <path d="M1500 430V280" stroke="#4a453e" stroke-width="8" stroke-linecap="round"/>
+  <path d="M1504 284h70l-18 26 18 26h-70z" fill="#c79e30"/>
+  <!-- climber nearly at the top -->
+  <path d="M1384 520l14-70h26l-6 70z" fill="#3c3a37"/>
+  <path d="M1426 520l-6-70h-20l-8 70z" fill="#33312e"/>
+  <path d="M1392 450c-6-50 6-90 30-96 22 4 30 40 24 96z" fill="#c79e30"/>
+  <path d="M1440 380l48-56" stroke="#c79e30" stroke-width="20" stroke-linecap="round"/>
+  <circle cx="1492" cy="318" r="11" fill="#9a6e4f"/>
+  <circle cx="1420" cy="326" r="30" fill="#9a6e4f"/>
+  <path d="M1390 322c0-30 22-44 46-38 14 4 22 16 20 32-10-12-24-14-40-10-8 8-16 14-26 16z" fill="#2c231d"/>
+  <!-- second climber lower down -->
+  <path d="M1236 610l10-56h22l-4 56z" fill="#5a544b"/>
+  <path d="M1270 610l-4-56h-18l-6 56z" fill="#4f4a42"/>
+  <path d="M1240 556c-4-40 4-72 24-76 18 4 24 34 20 76z" fill="#8a8174"/>
+  <circle cx="1262" cy="458" r="25" fill="#e2b896"/>
+  <path d="M1238 456c-2-26 18-38 38-32 12 4 18 14 16 28-8-10-20-12-34-8-6 6-12 10-20 12z" fill="#7a5a3c"/>
+</svg>

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <!-- Slide 4: time for a break and new ideas (armchair, coffee, sunrise window) -->
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ede7dc"/><stop offset="1" stop-color="#e0d7c9"/></linearGradient>
+    <linearGradient id="dawn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbf3dc"/><stop offset="1" stop-color="#f1d995"/></linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#wall)"/>
+  <rect y="760" width="1600" height="140" fill="#c9bcaa"/>
+  <!-- rug -->
+  <ellipse cx="300" cy="800" rx="290" ry="34" fill="#b8aa95"/>
+  <!-- armchair -->
+  <path d="M110 520c0-70 40-110 110-110h150c70 0 110 40 110 110v120H110z" fill="#8a8174"/>
+  <rect x="80" y="560" width="90" height="170" rx="40" fill="#6d665c"/>
+  <rect x="430" y="560" width="90" height="170" rx="40" fill="#6d665c"/>
+  <rect x="150" y="620" width="300" height="100" rx="24" fill="#7b7366"/>
+  <path d="M120 730l-10 40M480 730l10 40" stroke="#4a453e" stroke-width="12" stroke-linecap="round"/>
+  <!-- person relaxing with coffee -->
+  <path d="M250 640c60 0 120 4 170 10l70 90-24 16-74-66H250z" fill="#4a5568"/>
+  <path d="M470 732l40 20" stroke="#2b2926" stroke-width="22" stroke-linecap="round"/>
+  <path d="M200 640c-10-70 10-140 70-150 50 0 70 50 66 150z" fill="#e3c675"/>
+  <path d="M300 540c30 24 50 44 60 70l-22 12c-14-22-34-40-54-56z" fill="#e3c675"/>
+  <rect x="346" y="586" width="30" height="34" rx="5" fill="#fff"/>
+  <path d="M352 576c4-10-4-14 0-22M366 576c4-10-4-14 0-22" stroke="#b5ab9b" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="270" cy="450" r="40" fill="#c99a74"/>
+  <path d="M232 448c-6-40 26-64 58-56 24 6 36 28 30 54-6-18-24-28-46-26-16 12-28 20-42 28z" fill="#2c231d"/>
+  <path d="M256 456c6 6 14 6 20 0" stroke="#7a5a40" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- side table and plant -->
+  <rect x="560" y="640" width="120" height="14" rx="4" fill="#b89f7e"/>
+  <rect x="612" y="654" width="16" height="106" fill="#8a7a63"/>
+  <path d="M590 640l-8-60h76l-8 60z" fill="#fbf8f1"/>
+  <g fill="#7d8f6a"><path d="M620 582c-30-40-60-56-90-60 24 30 50 52 86 64z"/><path d="M624 580c4-50 20-80 46-100-6 40-18 72-40 102z"/></g>
+  <!-- sunrise window (right) -->
+  <rect x="1060" y="90" width="440" height="560" rx="8" fill="#5a544b"/>
+  <rect x="1078" y="108" width="404" height="524" fill="url(#dawn)"/>
+  <circle cx="1280" cy="520" r="90" fill="#e8b84a"/>
+  <path d="M1078 520c90-40 180-30 260-10s110 0 144-14v136H1078z" fill="#d8c9a6"/>
+  <path d="M1078 570c110-30 200-10 290-20s80-6 114 0v82H1078z" fill="#c7b892"/>
+  <g fill="#5a544b"><rect x="1272" y="108" width="16" height="524"/><rect x="1078" y="360" width="404" height="14"/></g>
+  <!-- idea bulb -->
+  <g transform="translate(1450 760)">
+    <circle cx="0" cy="-60" r="44" fill="#f6e3a8" opacity=".7"/>
+    <path d="M-26-60a26 26 0 1 1 52 0c0 14-10 20-12 34h-28c-2-14-12-20-12-34z" fill="#e8b84a"/>
+    <rect x="-14" y="-22" width="28" height="14" rx="3" fill="#8a8174"/>
+  </g>
+</svg>

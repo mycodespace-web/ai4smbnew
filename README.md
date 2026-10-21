@@ -37,7 +37,7 @@ Until `FORM_WEBHOOK_URL` is set, form submissions get a "not configured" error, 
 
 - Replace the placeholder legal text in `tms.html`, `ppl.html` and the address in `cpd.html` with your own.
 - Add the real logo (`logoSrc` in `js/config.js`); the header currently shows a drawn placeholder wordmark.
-- Add photos: hero slides (`style="background-image:url(images/…)"` on each `.slide-bg` in `index.html`), the footer band (`background-image` on `.site-footer` in `css/styles.css`) and the illustrations in the readiness, sessions and chatbot sections.
+- Images live in `public/images/`. Slides 1, 2 and 4 use the original Unsplash photos (`hero-1/2/4.webp`); slides 3 and 5, the readiness test, online sessions, chatbot and footer use original illustrations (`.svg`). To swap one for a photo, add the file and change its path: slides and footer in `css/styles.css` (`.slide-bg--N`, `.site-footer`), section pictures in `index.html`.
 - Swap in the final page copy where needed.
 
 ## Design notes

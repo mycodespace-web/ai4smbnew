@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <!-- Slide 5: the team with an AI colleague -->
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e3dccf"/><stop offset=".5" stop-color="#ede7dc"/><stop offset="1" stop-color="#e3dccf"/></linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#wall)"/>
+  <rect y="760" width="1600" height="140" fill="#c4b7a4"/>
+  <!-- left: two people at a table -->
+  <rect x="40" y="600" width="520" height="20" rx="4" fill="#b89f7e"/>
+  <rect x="80" y="620" width="14" height="140" fill="#8a7a63"/><rect x="506" y="620" width="14" height="140" fill="#8a7a63"/>
+  <!-- laptops -->
+  <path d="M120 598h150l6-6H114z" fill="#6d665c"/><path d="M130 594l20-110h120l-10 110z" fill="#4a453e"/>
+  <circle cx="202" cy="538" r="10" fill="#e3c675"/>
+  <path d="M330 598h150l6-6H324z" fill="#6d665c"/><path d="M476 594l-20-110H336l10 110z" fill="#4a453e"/>
+  <!-- person A (left, behind laptop) -->
+  <path d="M60 600c0-90 20-150 70-160 40 4 60 60 56 160z" fill="#6d665c"/>
+  <circle cx="120" cy="404" r="38" fill="#9a6e4f"/>
+  <path d="M84 400c-2-36 26-56 56-48 20 6 30 24 26 46-8-14-24-20-42-18-14 10-26 16-40 20z" fill="#1f1a17"/>
+  <!-- person B (right of table) -->
+  <path d="M480 600c-4-100 16-160 66-166 46 6 64 66 58 166z" fill="#c79e30"/>
+  <circle cx="540" cy="398" r="38" fill="#e2b896"/>
+  <path d="M502 396c0-40 30-58 62-48 18 6 28 22 24 44-12-6-24-20-40-20-14 14-30 20-46 24z" fill="#8a5a32"/>
+  <path d="M574 380c14 10 20 40 10 70" stroke="#8a5a32" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <!-- right: friendly AI robot colleague -->
+  <g transform="translate(1290 0)">
+    <path d="M0 270v-50" stroke="#6d665c" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="0" cy="212" r="14" fill="#c79e30"/>
+    <rect x="-110" y="270" width="220" height="170" rx="40" fill="#fbf8f1" stroke="#b5ab9b" stroke-width="4"/>
+    <rect x="-84" y="296" width="168" height="118" rx="26" fill="#3c3a37"/>
+    <ellipse cx="-36" cy="352" rx="14" ry="18" fill="#e3c675"/>
+    <ellipse cx="36" cy="352" rx="14" ry="18" fill="#e3c675"/>
+    <path d="M-24 384c14 12 34 12 48 0" stroke="#e3c675" stroke-width="7" fill="none" stroke-linecap="round"/>
+    <rect x="-26" y="440" width="52" height="24" fill="#b5ab9b"/>
+    <rect x="-130" y="464" width="260" height="220" rx="50" fill="#fbf8f1" stroke="#b5ab9b" stroke-width="4"/>
+    <circle cx="0" cy="560" r="34" fill="#c79e30"/>
+    <path d="M-12 560l8 8 16-18" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M130 510c50-20 70-70 80-120" stroke="#b5ab9b" stroke-width="30" fill="none" stroke-linecap="round"/>
+    <circle cx="212" cy="382" r="26" fill="#fbf8f1" stroke="#b5ab9b" stroke-width="4"/>
+    <path d="M-130 520c-40 30-50 80-40 130" stroke="#b5ab9b" stroke-width="30" fill="none" stroke-linecap="round"/>
+    <rect x="-90" y="684" width="56" height="76" rx="16" fill="#8a8174"/><rect x="34" y="684" width="56" height="76" rx="16" fill="#8a8174"/>
+  </g>
+  <!-- speech bubble -->
+  <path d="M1000 170h190a20 20 0 0 1 20 20v80a20 20 0 0 1-20 20h-120l-40 34 6-34h-36a20 20 0 0 1-20-20v-80a20 20 0 0 1 20-20z" fill="#fff"/>
+  <circle cx="1060" cy="230" r="10" fill="#c79e30"/><circle cx="1095" cy="230" r="10" fill="#c79e30"/><circle cx="1130" cy="230" r="10" fill="#c79e30"/>
+</svg>

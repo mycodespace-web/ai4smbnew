@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <!-- Slide 1: working on a laptop beside a tall window -->
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ebe5db"/><stop offset="1" stop-color="#ddd5c8"/></linearGradient>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbf8f1"/><stop offset="1" stop-color="#e4e8e6"/></linearGradient>
+    <linearGradient id="light" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#wall)"/>
+  <!-- window -->
+  <rect x="70" y="60" width="470" height="690" fill="#5a544b"/>
+  <rect x="88" y="78" width="434" height="654" fill="url(#sky)"/>
+  <path d="M88 560c70-40 150-30 220-70s130-20 214 10v232H88z" fill="#d6dcd6"/>
+  <path d="M88 620c90-30 170-10 260-40s120-10 174 0v152H88z" fill="#c5ccc4"/>
+  <g fill="#5a544b"><rect x="296" y="78" width="16" height="654"/><rect x="88" y="290" width="434" height="14"/><rect x="88" y="510" width="434" height="14"/></g>
+  <polygon points="540,120 980,900 620,900 540,750" fill="url(#light)"/>
+  <!-- floor -->
+  <rect y="760" width="1600" height="140" fill="#c9bcaa"/>
+  <rect y="760" width="1600" height="8" fill="#b8aa95"/>
+  <!-- plant -->
+  <path d="M600 760l-18-110h96l-18 110z" fill="#b89f7e"/>
+  <g fill="#7d8f6a"><path d="M630 652c-40-60-70-90-110-100 30 40 60 80 100 104z"/><path d="M640 652c0-80 10-130 40-170-6 60-16 110-30 172z"/><path d="M650 655c40-50 80-70 120-74-36 30-70 56-114 80z"/></g>
+  <g fill="#5f7353"><path d="M634 650c-20-70-14-120 6-160 4 50 6 100 2 162z"/></g>
+  <!-- desk -->
+  <rect x="960" y="590" width="600" height="22" rx="4" fill="#b89f7e"/>
+  <rect x="990" y="612" width="16" height="148" fill="#8a7a63"/><rect x="1510" y="612" width="16" height="148" fill="#8a7a63"/>
+  <!-- mug and notebook -->
+  <rect x="1010" y="556" width="34" height="36" rx="5" fill="#fff"/><path d="M1044 566c16 0 16 18 0 18" fill="none" stroke="#fff" stroke-width="6"/>
+  <rect x="1040" y="580" width="40" height="10" rx="2" fill="#c79e30"/>
+  <!-- laptop (side view) -->
+  <path d="M1160 588h180l6-6h-186z" fill="#6d665c"/>
+  <path d="M1172 584l-34-150 10-4 38 154z" fill="#4a453e"/>
+  <!-- lamp -->
+  <rect x="1086" y="582" width="48" height="8" rx="3" fill="#4a453e"/>
+  <path d="M1110 584v-150l50-50" fill="none" stroke="#4a453e" stroke-width="8" stroke-linecap="round"/>
+  <path d="M1196 356l-58 34 32 34z" fill="#c79e30"/>
+  <!-- chair -->
+  <rect x="1360" y="640" width="130" height="18" rx="6" fill="#4a453e"/>
+  <rect x="1470" y="500" width="18" height="150" rx="6" fill="#4a453e"/>
+  <rect x="1416" y="658" width="12" height="80" fill="#4a453e"/>
+  <path d="M1370 760l52-22 52 22" fill="none" stroke="#4a453e" stroke-width="10" stroke-linecap="round"/>
+  <!-- person -->
+  <path d="M1390 640h70l-6 112h-30l-12-80h-60z" fill="#3c3a37"/>
+  <path d="M1356 672l-10 84h28l14-84z" fill="#3c3a37"/>
+  <rect x="1336" y="748" width="46" height="14" rx="6" fill="#2b2926"/>
+  <path d="M1384 470c40-10 74 10 82 60l8 112h-104l-8-120c0-30 6-46 22-52z" fill="#a89270"/>
+  <path d="M1392 500c-30 20-60 50-90 66l10 18c40-12 70-30 94-50z" fill="#a89270"/>
+  <circle cx="1306" cy="576" r="11" fill="#e2b896"/>
+  <rect x="1404" y="440" width="26" height="36" rx="10" fill="#e2b896"/>
+  <circle cx="1414" cy="410" r="40" fill="#e2b896"/>
+  <path d="M1376 404c-4-40 30-62 62-52 22 6 34 26 30 52-10-14-28-22-48-20-14 10-28 16-44 20z" fill="#5b4330"/>
+  <path d="M1378 422c10 26 36 34 60 28-8 16-34 22-52 10z" fill="#6b5240" opacity=".7"/>
+</svg>
